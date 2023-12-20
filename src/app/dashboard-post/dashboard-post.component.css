@@ -1,0 +1,10 @@
+
+.example-card{
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 10px;
+}
+.example-viewport {
+  height: calc(100vh - 36px);
+  width: 100%;
+}

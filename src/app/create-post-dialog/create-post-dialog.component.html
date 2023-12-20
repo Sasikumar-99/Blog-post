@@ -1,0 +1,24 @@
+
+<mat-card>
+  <form [formGroup]="postForm" (submit)="postSubmit()">
+    <mat-card-header>
+      <mat-card-title>Post Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="d-flex flex-column">
+      <div class="mt-2">
+        <input type="file" (change)="onFileUpload($event)">
+      </div>
+      <div class="mt-2">
+        <mat-form-field>
+          <mat-label>Caption..</mat-label>
+          <textarea matInput formControlName ="postDetails"></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button>
+        Post
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

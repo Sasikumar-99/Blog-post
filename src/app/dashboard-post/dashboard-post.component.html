@@ -1,0 +1,64 @@
+  <div>
+    <button mat-raised-button color="primary" class="w-100" (click)="openPostComponent()">Click to post..</button>
+  </div>
+  <cdk-virtual-scroll-viewport class="example-viewport" itemSize="50">
+  <mat-card  class="example-card mt-2 ml-2 mr-2" *ngFor="let post of posts;let postIndex = index">
+    <img mat-card-image class="rounded" width="100%" height="300px" [src]="post.postImage" alt="Photo of a Shiba Inu">
+    <mat-card-content class="mt-0.5">
+      <mat-card-title>
+        {{post.postDetails}}
+      </mat-card-title>
+    </mat-card-content>
+    <mat-card-actions class="flex-column align-items-start mt-2 p-0">
+      <div class="w-100 d-flex justify-content-between align-items-center">
+        <div style="display: inline;">
+          <button [matBadge]="post.likes" matBadgeColor="primary" mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+                  (click)="postLiked(postIndex)">
+            <mat-icon >thumb_up</mat-icon>
+          </button>
+          <button [matBadge]="post.dislikes" matBadgeColor="warn" mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+                  (click)="postDisliked(postIndex)">
+            <mat-icon >thumb_down</mat-icon>
+          </button>
+        </div>
+        <div style="width: 90%" class="d-flex align-items-center justify-content-center">
+          <div style="width: 100%">
+            <mat-form-field class="w-100 mt-2" appearance="outline">
+              <mat-label>Leave a comment</mat-label>
+              <input matInput #comment>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-icon-button color="primary" (click)="commentOnPost(postIndex, comment.value)">
+              <mat-icon>
+                send
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card-actions>
+    <div *ngIf="post.comments.length > 0">
+      <mat-card-subtitle>
+        Comments..
+      </mat-card-subtitle>
+      <div *ngFor="let comment of post.comments; let commentIndex = index" class="d-flex justify-content-center align-items-center w-100 mt-0.5">
+        <div style="width: 90%">
+          <mat-form-field style="width: 100%" appearance="outline">
+            <input  matInput [value]="comment.commentText" readonly>
+          </mat-form-field>
+        </div>
+        <div style="width: 10%" class="d-flex justify-content-center align-items-center">
+          <button [matBadge]="comment.likes" matBadgeColor="primary" mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+            (click)="commentLike(postIndex, commentIndex)">
+            <mat-icon >thumb_up</mat-icon>
+          </button>
+          <button [matBadge]="comment.dislikes" matBadgeColor="warn"  mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+                  (click)="commentDislike(postIndex, commentIndex)">
+            <mat-icon >thumb_down</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</cdk-virtual-scroll-viewport>
